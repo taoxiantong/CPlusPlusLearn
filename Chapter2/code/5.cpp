@@ -1,4 +1,8 @@
 # include "iostream"
+# include "boost/scoped_ptr.hpp"
+#include "boost/shared_ptr.hpp"
+#include "boost/scoped_array.hpp"
+#include "vector"
 using namespace std;
 
 void scope_test()
@@ -29,8 +33,20 @@ void array_test()
 
 }
 
+void shared_test()
+{
+    boost::shared_ptr<int> i1(new int(1));
+    cout<<"i1: "<< *i1 <<"  i1 adv: "<<&i1<<endl;
+
+    boost::shared_ptr<int> i2(i1);
+    cout<<"i2: "<< *i2 <<"  i2 adv: "<<&i2<<endl;
+    i1.reset(new int(2));
+
+    cout<<"i1: "<< *i1 <<"  i1 adv: "<<&i1<<endl;
+    cout<<"i2: "<< *i2 <<"  i2 adv: "<<&i2<<endl;
+}
 int main()
 {
-    array_test();
+    shared_test();
     return 0;
 }
